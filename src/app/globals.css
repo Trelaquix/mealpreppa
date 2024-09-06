@@ -1,6 +1,84 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,500&display=swap");
 
+how m.add-item-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+  
+  .add-item-modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    top: -10%; /* Shift the modal 10% up from the center */
+  }
+  
+  .add-item-modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Add space between each row */
+  }
+  
+  .add-item-modal-content .form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .add-item-modal-content label {
+    flex: 1; /* Labels take up equal space */
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .add-item-modal-content input[type="text"],
+  .add-item-modal-content input[type="number"] {
+    flex: 2; /* Inputs take up more space compared to labels */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .add-item-modal-content button[type="submit"] {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .add-item-modal-content button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  .add-item-modal-content button[type="button"] {
+    margin-top: 10px;
+    padding: 8px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .add-item-modal-content button[type="button"]:hover {
+    background-color: #e53935;
+  }
+  

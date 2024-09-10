@@ -8,10 +8,20 @@ import { FoodItem } from './types';
 // }
 
 interface AddItemModalProps {
-    onClose: () => void;
-    onSubmit: (newItem: FoodItem) => void;
-  }
+  onClose: () => void;
+  onSubmit: (newItem: FoodItem) => void;
+}
 
+interface InputFieldProps {
+  label: string;
+  type: string;
+  id: string;
+  placeholder: string;
+  value: string | number | null;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean;
+  min?: number;
+}
 
 const AddItemModal: React.FC<AddItemModalProps> = ({ onClose, onSubmit }) => {
   const [name, setName] = useState('');
@@ -55,107 +65,46 @@ const AddItemModal: React.FC<AddItemModalProps> = ({ onClose, onSubmit }) => {
     }
   };
 
-  return (
-    <div className="add-item-modal">
-      <div className="add-item-modal-content">
-        <h2>Add Item</h2> {/* Modal Title */}
-        <form onSubmit={handleSubmit} noValidate>
-          <div className="form-row">
-            <label htmlFor="name">Name:</label>
-            <input 
-              type="text" 
-              id="name"
-              placeholder="Name" 
-              value={name} 
-              onChange={(e) => setName(e.target.value)} 
-              required
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="brand">Brand:</label>
-            <input 
-              type="text" 
-              id="brand"
-              placeholder="Brand" 
-              value={brand} 
-              onChange={(e) => setBrand(e.target.value)} 
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="price">Price ($):</label>
-            <input 
-              type="number" 
-              id="price"
-              placeholder="Price ($)" 
-              value={price} 
-              onChange={(e) => setPrice(parseFloat(e.target.value) || '')} 
-              required
-              min="0" /* Ensures the price can't be negative */
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="weight">Weight (Kg):</label>
-            <input 
-              type="number" 
-              id="weight"
-              placeholder="Weight (Kg)" 
-              value={weight} 
-              onChange={(e) => setWeight(parseFloat(e.target.value) || '')} 
-              required
-              min="0" /* Ensures the weight can't be negative */
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="calories">Calories (Kcal):</label>
-            <input 
-              type="number" 
-              id="calories"
-              placeholder="Calories (Kcal)" 
-              value={calories} 
-              onChange={(e) => setCalories(parseInt(e.target.value) || '')} 
-              required
-              min="0" /* Ensures the calories can't be negative */
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="protein">Protein (g):</label>
-            <input 
-              type="number" 
-              id="protein"
-              placeholder="Protein (g)" 
-              value={protein} 
-              onChange={(e) => setProtein(parseInt(e.target.value) || '')} 
-              min="0" /* Ensures the protein can't be negative */
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="carbs">Carbs (g):</label>
-            <input 
-              type="number" 
-              id="carbs"
-              placeholder="Carbs (g)" 
-              value={carbs} 
-              onChange={(e) => setCarbs(parseInt(e.target.value) || '')} 
-              min="0" /* Ensures the carbs can't be negative */
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="fats">Fats (g):</label>
-            <input 
-              type="number" 
-              id="fats"
-              placeholder="Fats (g)" 
-              value={fats} 
-              onChange={(e) => setFats(parseInt(e.target.value) || '')} 
-              min="0" /* Ensures the fats can't be negative */
-            />
-          </div>
-          <button type="submit">Add Item</button>
-        </form>
-        <button type="button" onClick={onClose}>Close</button>
+  function InputField({ label, type, id, placeholder, value, onChange, required, min }: InputFieldProps) {
+    return (
+      <div className="form-row">
+        <label htmlFor={id}>{label}:</label>
+        <input
+          type={type}
+          id={id}
+          placeholder={placeholder}
+          value={value ?? ''}
+          onChange={onChange}
+          required={required}
+          min={min}
+        />
       </div>
+    );
+  }
+
+return (
+  <div className="add-item-modal">
+    <div className="add-item-modal-content">
+      <div className="add-item-modal-title">
+        <h2>Add Item</h2>
+      </div>
+      <form onSubmit={handleSubmit} noValidate>
+        <InputField label="Name" type="text" id="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
+        <InputField label="Brand" type="text" id="brand" placeholder="Brand" value={brand} onChange={(e) => setBrand(e.target.value)} />
+        <InputField label="Price ($)" type="number" id="price" placeholder="Price ($)" value={price} onChange={(e) => setPrice(isNaN(parseFloat(e.target.value)) ? '' : parseFloat(e.target.value))} required min={0} />
+        <InputField label="Weight (Kg)" type="number" id="weight" placeholder="Weight (Kg)" value={weight} onChange={(e) => setWeight(parseFloat(e.target.value) || '')} required min={0} />
+        <InputField label="Calories (Kcal)" type="number" id="calories" placeholder="Calories (Kcal)" value={calories} onChange={(e) => setCalories(parseInt(e.target.value) || '')} required min={0} />
+        <InputField label="Protein (g)" type="number" id="protein" placeholder="Protein (g)" value={protein} onChange={(e) => setProtein(parseInt(e.target.value) || '')} min={0} />
+        <InputField label="Carbs (g)" type="number" id="carbs" placeholder="Carbs (g)" value={carbs} onChange={(e) => setCarbs(parseInt(e.target.value) || '')} min={0} />
+        <InputField label="Fats (g)" type="number" id="fats" placeholder="Fats (g)" value={fats} onChange={(e) => setFats(parseInt(e.target.value) || '')} min={0} />
+
+        <button type="submit">Add Item</button>
+      </form>
+      <button type="button" onClick={onClose}>Close</button>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default AddItemModal;

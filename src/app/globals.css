@@ -4,7 +4,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,500&display=swap");
 
-how m.add-item-modal {
+  .add-item-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -19,7 +19,8 @@ how m.add-item-modal {
   
   .add-item-modal-content {
     background-color: white;
-    padding: 20px;
+    /* padding: 20px; */
+    padding: 10px 20px 30px;
     border-radius: 5px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
     position: relative;
@@ -28,6 +29,11 @@ how m.add-item-modal {
     top: -10%; /* Shift the modal 10% up from the center */
   }
   
+  .add-item-modal-title {
+    text-align: center;
+    margin-bottom: 20px; 
+  }
+
   .add-item-modal-content form {
     display: flex;
     flex-direction: column;
@@ -54,7 +60,7 @@ how m.add-item-modal {
     border-radius: 4px;
   }
   
-  .add-item-modal-content button[type="submit"] {
+  .add-item-modal-content button {
     margin-top: 15px;
     padding: 10px;
     background-color: #4caf50;
@@ -69,16 +75,12 @@ how m.add-item-modal {
   }
   
   .add-item-modal-content button[type="button"] {
-    margin-top: 10px;
-    padding: 8px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    margin-top: 10px !important; 
+    padding: 8px !important;
+    background-color: #f44336 ;
   }
   
   .add-item-modal-content button[type="button"]:hover {
-    background-color: #e53935;
+    background-color: #c62828;
   }
   

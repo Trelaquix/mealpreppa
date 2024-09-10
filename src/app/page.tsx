@@ -71,9 +71,9 @@ const Page = () => {
   };
 
   return (
-    <div>
+    <div className="page-container">
       {data && (
-        <table>
+        <table className="styled-table">
           <thead>
             <tr>
               <th>Name</th>
@@ -93,12 +93,11 @@ const Page = () => {
           </tbody>
         </table>
       )}
-      <button onClick={addItem}>Add New Item</button>
+      <button className="add-item-button" onClick={() => setIsAddItem(true)}>
+        Add New Item
+      </button>
       {isAddItem && (
-        <AddItemModal 
-          onClose={handleCloseModal} 
-          onSubmit={handleSubmit}
-        />
+        <AddItemModal onClose={() => setIsAddItem(false)} onSubmit={handleSubmit} />
       )}
     </div>
   );
